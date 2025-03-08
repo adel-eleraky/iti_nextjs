@@ -1,0 +1,56 @@
+import Image from "next/image";
+import Link from "next/link";
+// import ReactStars from 'react-stars';
+
+interface Product {
+    id: number
+    title: string
+    thumbnail: string
+    category: string
+    price: number
+    description: string
+}
+const ProductCard = ({ product}: { product: Product}) => {
+
+
+    const { thumbnail, id, title, price, description, category } = product
+
+    return (
+        <div className="relative border p-3 mb-3 rounded-lg shadow-md">
+            <span className="absolute top-2 right-2 text-red-600 cursor-pointer">
+                <i className="fa-solid fa-heart"></i>
+            </span>
+            <Image
+                className="w-full h-72 object-contain mb-3 rounded-md"
+                src={thumbnail}
+                alt="product img"
+                width={100}
+                height={100}
+            />
+            <div className="space-y-3">
+                <div className="text-orange-500">{category}</div>
+                <div className="font-bold text-lg truncate">{title}</div>
+                <hr className="border-gray-300" />
+                <div className="truncate">{description}</div>
+                <div className="font-bold text-gray-700">Price: ${price}</div>
+                <div className="flex gap-5">
+                    <button
+                        className="w-full bg-green-700 text-white font-bold py-2 rounded-lg flex items-center justify-center space-x-2 hover:bg-green-800 transition"
+                    >
+                        <i className="fa-solid fa-cart-plus"></i>
+                        <span>Add to Cart</span>
+                    </button>
+                    <Link href={`/products/${id}`}
+                        className="w-full bg-yellow-700 text-white font-bold py-2 rounded-lg flex items-center justify-center space-x-2 hover:bg-green-800 transition"
+                    >
+                        <i className="fa-solid fa-cart-plus"></i>
+                        <span>View details</span>
+                    </Link>
+                </div>
+
+            </div>
+        </div>
+    );
+};
+
+export default ProductCard;
