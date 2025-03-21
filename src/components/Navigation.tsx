@@ -10,12 +10,11 @@ function Navigation() {
     useEffect(() => {
         const checkAuth = async () => {
             const { data: { user } } = await supabase.auth.getUser();
-            setIsLoggedIn(!!user); // Set isLoggedIn to true if user exists
+            setIsLoggedIn(!!user); 
         };
 
         checkAuth();
 
-        // Listen for auth state changes (e.g., login/logout)
         const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
             setIsLoggedIn(!!session?.user);
         });

@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/contexts/CartContext";
 import { toast } from "react-toastify";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation"; 
 import { supabase } from "@/lib/supabaseClient";
 
 interface Product {
@@ -17,13 +17,13 @@ interface Product {
 
 const ProductCard = ({ product }: { product: Product }) => {
     const { thumbnail, id, title, price, description, category } = product;
-    const { addToCart } = useCart(); // Use the Cart Context
+    const { addToCart } = useCart();
     const router = useRouter()
 
     const handleAddToCart = async () => {
         const { data: { user } } = await supabase.auth.getUser();
         if (!user) {
-            router.push("/login"); // Redirect to login page if not authenticated
+            router.push("/login"); 
             return;
         }
 
@@ -32,7 +32,7 @@ const ProductCard = ({ product }: { product: Product }) => {
             title,
             image: thumbnail,
             price,
-            quantity: 1, // Default quantity
+            quantity: 1,
         });
         toast.success(`${title} added to cart!`);
     };
@@ -57,7 +57,7 @@ const ProductCard = ({ product }: { product: Product }) => {
                 <div className="font-bold text-gray-700">Price: ${price}</div>
                 <div className="flex gap-5">
                     <button
-                        onClick={handleAddToCart} // Add to Cart functionality
+                        onClick={handleAddToCart} 
                         className="w-full bg-green-700 text-white font-bold py-2 rounded-lg flex items-center justify-center space-x-2 hover:bg-green-800 transition"
                     >
                         <i className="fa-solid fa-cart-plus"></i>

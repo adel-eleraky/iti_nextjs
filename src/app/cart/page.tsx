@@ -1,4 +1,4 @@
-// pages/cart.js
+
 "use client";
 
 import withAuth from "@/components/WithAuth";

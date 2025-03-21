@@ -13,7 +13,7 @@ export default function withAuth(Component) {
             const checkAuth = async () => {
                 const { data: { user } } = await supabase.auth.getUser();
                 if (!user) {
-                    router.push("/login"); // Redirect to login page if not authenticated
+                    router.push("/login");
                 }
             };
 
